@@ -1,0 +1,8 @@
+{{page-title "Bands"}}
+
+<ul>
+  {{outlet}}
+  {{#each @model as |band|}}
+    <li>{{band.name}}</li>
+  {{/each}}
+</ul>

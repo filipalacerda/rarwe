@@ -8,6 +8,9 @@ module.exports = function (defaults) {
     postcssOptions: {
       compile: {
         plugins: [require('tailwindcss')('tailwind.config.js')],
+        enabled: true,
+        includePaths: ['app'],
+        cacheInclude: [/.*\.(css|js|hbs|html)$/, /.\/tailwind\.config\.js/],
       },
     },
   });
@@ -25,26 +28,5 @@ module.exports = function (defaults) {
         package: 'qunit',
       },
     ],
-    // packagerOptions: {
-    //   webpackConfig: {
-    //     module: {
-    //       rules: [
-    //         {
-    //           test: /\.css$/i,
-    //           use: [
-    //             {
-    //               loader: 'postcss-loader',
-    //               options: {
-    //                 postcssOptions: {
-    //                   config: 'postcss.config.js',
-    //                 },
-    //               },
-    //             },
-    //           ],
-    //         },
-    //       ],
-    //     },
-    //   },
-    // },
   });
 };
