@@ -5,6 +5,11 @@ const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 module.exports = function (defaults) {
   const app = new EmberApp(defaults, {
     // Add options here
+    postcssOptions: {
+      compile: {
+        plugins: [require('tailwindcss')('tailwind.config.js')],
+      },
+    },
   });
 
   const { Webpack } = require('@embroider/webpack');
@@ -20,5 +25,26 @@ module.exports = function (defaults) {
         package: 'qunit',
       },
     ],
+    // packagerOptions: {
+    //   webpackConfig: {
+    //     module: {
+    //       rules: [
+    //         {
+    //           test: /\.css$/i,
+    //           use: [
+    //             {
+    //               loader: 'postcss-loader',
+    //               options: {
+    //                 postcssOptions: {
+    //                   config: 'postcss.config.js',
+    //                 },
+    //               },
+    //             },
+    //           ],
+    //         },
+    //       ],
+    //     },
+    //   },
+    // },
   });
 };
