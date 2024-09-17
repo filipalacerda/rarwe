@@ -70,9 +70,11 @@ export default class CatalogService extends Service {
   }
 
   async fetchRelated(record, relationship) {
-    let url = record.relationships[relationship];
-    let response = await fetch(url);
-    let json = await response.json();
+    const url = record.relationships[relationship];
+    const json = await fetch(url).then((response) => {
+      return response.json();
+    });
+
     if (isArray(json.data)) {
       record[relationship] = this.loadAll(json);
     } else {
@@ -82,33 +84,34 @@ export default class CatalogService extends Service {
   }
 
   async create(type, attributes, relationships = {}) {
-    let payload = {
+    const payload = {
       data: {
         type: type === 'band' ? 'bands' : 'songs',
         attributes,
         relationships,
       },
     };
-    let response = await fetch(type === 'band' ? '/bands' : '/songs', {
+
+    const json = await fetch(type === 'band' ? '/bands' : '/songs', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/vnd.api+json',
       },
       body: JSON.stringify(payload),
-    });
-    let json = await response.json();
+    }).then((response) => response.json());
+
     return this.load(json);
   }
 
   async update(type, record, attributes) {
-    let payload = {
+    const payload = {
       data: {
         id: record.id,
         type: type === 'band' ? 'bands' : 'songs',
         attributes,
       },
     };
-    let url = type === 'band' ? `/bands/${record.id}` : `/songs/${record.id}`;
+    const url = type === 'band' ? `/bands/${record.id}` : `/songs/${record.id}`;
     await fetch(url, {
       method: 'PATCH',
       headers: {
@@ -122,7 +125,11 @@ export default class CatalogService extends Service {
     const collection =
       type === 'band' ? this.storage.bands : this.storage.songs;
 
-    collection.push(record);
+    const recordIds = collection.map((record) => record.id);
+
+    if (!recordIds.includes(record.id)) {
+      collection.push(record);
+    }
   }
 
   get bands() {
