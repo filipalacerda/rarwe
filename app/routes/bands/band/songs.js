@@ -5,12 +5,14 @@ import fetch from 'fetch';
 
 export default class BandsBandSongsRoute extends Route {
   @service catalog;
+
   async model() {
     let band = this.modelFor('bands.band');
     let url = band.relationships.songs;
     let response = await fetch(url);
     let json = await response.json();
     let songs = [];
+
     for (let item of json.data) {
       let { id, attributes, relationships } = item;
       let rels = {};
