@@ -52,7 +52,11 @@
       <FaIcon class="h-5 w-5 text-gray-400" @icon="search" @prefix="fas" />
     </div>
   </div>
-  <button type="button" {{on "click" this.clearSearch}}>Clear</button>
+  <button
+    type="button"
+    class="ml-2"
+    {{on "click" this.clearSearch}}
+  >Clear</button>
 </div>
 {{#if this.sortedSongs.length}}
   <ul>
