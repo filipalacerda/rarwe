@@ -16,8 +16,6 @@ module('Integration | Component | band-list', function (hooks) {
       new Band({ id: 2, name: 'Foo Fighters' }),
     ]);
 
-    console.log(this.bands);
-
     await render(hbs`<BandList @bands={{this.bands}}/>`);
 
     assert.dom('[data-test-rr="band-link"]').exists({ count: 2 });

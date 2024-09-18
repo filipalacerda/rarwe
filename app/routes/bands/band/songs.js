@@ -8,6 +8,9 @@ export default class BandsBandSongsRoute extends Route {
     sortBy: {
       as: 's',
     },
+    searchTerm: {
+      as: 'q',
+    },
   };
 
   async model() {
