@@ -1,9 +1,46 @@
 {{page-title @model.name " songs | Rock & Roll with Octane" replace=true}}
 
-{{#if @model.songs.length}}
+{{#if this.sortedSongs.length}}
+  <div class="mb-8">
+    <span class="relative z-0 inline-glex shadow-sm">
+      <LinkTo
+        class="rounded-l-md inline-flex items-center px-4 py-2 border border-gray-500 bg-purple-600 leading-5 font-medium text-gray-100 hover:text-white hover:bg-purple-500"
+        data-test-rr="sort-by-title-asc"
+        @query={{hash s="title"}}
+      >
+        Title
+        <FaIcon class="ml-2" @icon="angle-up" @prefix="fas" />
+      </LinkTo>
+      <LinkTo
+        class="-ml-px inline-flex items-center px-4 py-2 border border- gray-500 bg-purple-600 leading-5 font-medium text-gray-100 hover:text- white hover:bg-purple-500"
+        data-test-rr="sort-by-title-desc"
+        @query={{hash s="-title"}}
+      >
+        Title
+        <FaIcon class="ml-2" @icon="angle-down" @prefix="fas" />
+      </LinkTo>
+
+      <LinkTo
+        class="-ml-px inline-flex items-center px-4 py-2 border border- gray-500 bg-purple-600 leading-5 font-medium text-gray-100 hover:text- white hover:bg-purple-500"
+        data-test-rr="sort-by-rating-asc"
+        @query={{hash s="rating"}}
+      >
+        Rating
+        <FaIcon class="ml-2" @icon="angle-up" @prefix="fas" />
+      </LinkTo>
+      <LinkTo
+        class="rounded-r-md -ml-px inline-flex items-center px-4 py-2 border border-gray-500 bg-purple-600 leading-5 font-medium text- gray-100 hover:bg-purple-500 hover:text-white"
+        data-test-rr="sort-by-rating-desc"
+        @query={{hash s="-rating"}}
+      >
+        Rating
+        <FaIcon class="ml-2" @icon="angle-down" @prefix="fas" />
+      </LinkTo>
+    </span>
+  </div>
   <ul>
-    {{#each @model.songs as |song|}}
-      <li class="mb-2">
+    {{#each this.sortedSongs as |song|}}
+      <li class="mb-2" data-test-rr="song-list-item">
         {{song.title}}
         <span class="float-right">
           <StarRating

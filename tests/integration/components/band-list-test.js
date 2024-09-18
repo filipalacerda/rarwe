@@ -10,7 +10,7 @@ module('Integration | Component | band-list', function (hooks) {
   test('it renders', async function (assert) {
     this.owner.lookup('service:router');
     this.owner.setupRouter();
-    
+
     this.set('bands', [
       new Band({ id: 1, name: 'Led Zeppelin' }),
       new Band({ id: 2, name: 'Foo Fighters' }),
