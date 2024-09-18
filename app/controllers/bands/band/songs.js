@@ -53,6 +53,12 @@ export default class BandsBandSongsController extends Controller {
   updateSearchTerm(event) {
     this.searchTerm = event.target.value;
   }
+
+  @action
+  clearSearch() {
+    this.searchTerm = '';
+  }
+
   @action
   async updateRating(song, rating) {
     song.rating = rating;

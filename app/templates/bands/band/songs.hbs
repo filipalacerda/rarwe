@@ -40,7 +40,7 @@
   <div class="relative ml-auto rounded-md shadow-sm">
     <label for="search-box" class="sr-only">Search</label>
     <input
-      class="border rounded-md py-2 px-3 block w-full pr-10 text- gray-800 sm:text-sm sm:leading-5"
+      class="border rounded-md py-2 px-3 block w-full pr-10 text-black gray-800 sm:text-sm sm:leading-5"
       id="search-box"
       data-test-rr="search-box"
       value={{this.searchTerm}}
@@ -52,6 +52,7 @@
       <FaIcon class="h-5 w-5 text-gray-400" @icon="search" @prefix="fas" />
     </div>
   </div>
+  <button type="button" {{on "click" this.clearSearch}}>Clear</button>
 </div>
 {{#if this.sortedSongs.length}}
   <ul>

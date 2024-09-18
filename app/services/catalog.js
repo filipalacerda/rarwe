@@ -34,16 +34,18 @@ export default class CatalogService extends Service {
 
   async fetchAll(type) {
     if (type === 'bands') {
-      const response = await fetch(this.bandsURL);
-      const json = await response.json();
+      const json = await fetch(this.bandsURL).then((response) =>
+        response.json(),
+      );
 
       this.loadAll(json);
       return this.bands;
     }
 
     if (type === 'songs') {
-      const response = await fetch(this.songsURL);
-      const json = await response.json();
+      const json = await fetch(
+        this.songsURL.then((response) => response.json()),
+      );
 
       this.loadAll(json);
       return this.songs;
@@ -120,10 +122,12 @@ export default class CatalogService extends Service {
         attributes,
       },
     };
+
     const url =
       type === 'band'
         ? `${this.bandsURL}/${record.id}`
         : `${this.songsURL}/${record.id}`;
+
     await fetch(url, {
       method: 'PATCH',
       headers: {
