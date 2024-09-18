@@ -14,7 +14,8 @@ export default class BandsBandSongsRoute extends Route {
   };
 
   async model() {
-    let band = this.modelFor('bands.band');
+    const band = this.modelFor('bands.band');
+
     await this.catalog.fetchRelated(band, 'songs');
     return band;
   }
