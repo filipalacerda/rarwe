@@ -17,7 +17,7 @@ module('Acceptance | bands', function (hooks) {
     assert.strictEqual(getPageTitle(), 'Bands | Rock & Roll with Octane');
 
     assert
-      .dom('[data-test-rr="bank-link"]')
+      .dom('[data-test-rr="band-link"]')
       .exists({ count: 2 }, 'All band links are rendered');
     assert
       .dom('[data-test-rr="band-list-item"]:first-child')

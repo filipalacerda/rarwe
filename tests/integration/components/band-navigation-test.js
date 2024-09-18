@@ -6,21 +6,18 @@ import { hbs } from 'ember-cli-htmlbars';
 module('Integration | Component | band-navigation', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders', async function (assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
+  test('it renders two links', async function (assert) {
+    this.owner.lookup('service:router');
+    this.owner.setupRouter();
 
     await render(hbs`<BandNavigation />`);
 
-    assert.dom().hasText('');
+    assert
+      .dom('[data-test-rr="details-nav-item"]')
+      .exists('The Details tab exists');
 
-    // Template block usage:
-    await render(hbs`
-      <BandNavigation>
-        template block text
-      </BandNavigation>
-    `);
-
-    assert.dom().hasText('template block text');
+    assert
+      .dom('[data-test-rr="songs-nav-item"]')
+      .exists('The Songs tab exists');
   });
 });

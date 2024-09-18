@@ -2,25 +2,24 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'rarwe/tests/helpers';
 import { render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
+import Band from 'rarwe/models/band';
 
 module('Integration | Component | band-list', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function (assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
+    this.owner.lookup('service:router');
+    this.owner.setupRouter();
+    
+    this.set('bands', [
+      new Band({ id: 1, name: 'Led Zeppelin' }),
+      new Band({ id: 2, name: 'Foo Fighters' }),
+    ]);
 
-    await render(hbs`<BandList />`);
+    console.log(this.bands);
 
-    assert.dom().hasText('');
+    await render(hbs`<BandList @bands={{this.bands}}/>`);
 
-    // Template block usage:
-    await render(hbs`
-      <BandList>
-        template block text
-      </BandList>
-    `);
-
-    assert.dom().hasText('template block text');
+    assert.dom('[data-test-rr="band-link"]').exists({ count: 2 });
   });
 });
